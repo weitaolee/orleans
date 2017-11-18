@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace Orleans.ServiceFabric
+﻿namespace Microsoft.Orleans.ServiceFabric.Models
 {
     using global::Orleans.Runtime;
+    using global::Orleans.Runtime.Configuration;
 
     using Newtonsoft.Json;
 
@@ -11,6 +10,24 @@ namespace Orleans.ServiceFabric
     /// </summary>
     public class FabricSiloInfo
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FabricSiloInfo" /> class.
+        /// </summary>
+        /// <param name="config">
+        /// The node configuration to initialize from.
+        /// </param>
+        public FabricSiloInfo(NodeConfiguration config)
+        {
+            this.Name = config.SiloName;
+            this.Silo = SiloAddress.New(config.Endpoint, config.Generation).ToParsableString();
+            this.Gateway = SiloAddress.New(config.ProxyGatewayEndpoint, config.Generation).ToParsableString();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FabricSiloInfo" /> class.
+        /// </summary>
+        public FabricSiloInfo() { }
+
         /// <summary>
         /// Gets the name of the silo.
         /// </summary>
@@ -28,12 +45,6 @@ namespace Orleans.ServiceFabric
         /// </summary>
         [JsonProperty("gw")]
         public string Gateway { get; set; }
-
-        /// <summary>
-        /// Gets the collection of other endpoints associated with this silo.
-        /// </summary>
-        [JsonProperty("other")]
-        public Dictionary<string, string> OtherEndpoints { get; } = new Dictionary<string, string>();
 
         /// <summary>
         /// Gets the parsed silo address.

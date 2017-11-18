@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using Orleans.Membership.ServiceFabric.Utilities;
 using Orleans.Runtime;
+using Microsoft.Orleans.ServiceFabric.Models;
+using Microsoft.Orleans.ServiceFabric.Utilities;
+using Orleans;
 
-namespace Orleans.Membership.ServiceFabric
+namespace Microsoft.Orleans.ServiceFabric
 {
     /// <summary>
     /// Provides information about an Orleans cluster hosted on Service Fabric.
@@ -31,15 +33,15 @@ namespace Orleans.Membership.ServiceFabric
         /// </summary>
         /// <param name="serviceName">The name of the Service Fabric service which this instance will resolve.</param>
         /// <param name="queryManager">The fabric query manager.</param>
-        /// <param name="logger">The logger.</param>
+        /// <param name="loggerFactory">The logger factory.</param>
         public FabricServiceSiloResolver(
             Uri serviceName,
             IFabricQueryManager queryManager,
-            ILogger<FabricServiceSiloResolver> logger)
+            ILogger logger)
         {
             this.serviceName = serviceName;
             this.queryManager = queryManager;
-            this.log = logger;
+            this.log =logger;
             this.partitionChangeHandler = this.OnPartitionChange;
         }
 

@@ -1,10 +1,14 @@
-using System;
 using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.ServiceFabric.Services.Client;
+using Microsoft.Orleans.ServiceFabric.Models;
 
-namespace Orleans.Membership.ServiceFabric.Utilities
+namespace Microsoft.Orleans.ServiceFabric.Utilities
 {
+    using System;
+    using System.Fabric.Query;
+    using System.Threading.Tasks;
+
+    using Microsoft.ServiceFabric.Services.Client;
+
     internal interface IFabricQueryManager
     {
         /// <summary>

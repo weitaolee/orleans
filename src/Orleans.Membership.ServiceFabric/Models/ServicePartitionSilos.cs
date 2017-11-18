@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using Orleans.ServiceFabric;
 
-namespace Orleans.Membership.ServiceFabric
+namespace Microsoft.Orleans.ServiceFabric.Models
 {
     /// <summary>
     /// Represents a Service Fabric service partition and the Orleans silos within it.
